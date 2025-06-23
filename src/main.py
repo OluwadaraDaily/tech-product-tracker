@@ -4,30 +4,53 @@ from parsers.microcenter import parse_microcenter_html
 from storage.csv_writer import write_to_csv
 from alerts.telegram import TelegramAlert
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_ALERT_ENABLED
+from utils import select_stores
+
+async def process_store(store: str, search_param: str) -> str:
+    """Process a single store and return the CSV filename."""
+    if store == "microcenter":
+        beautiful_soup_object = fetch_microcenter_html(search_param)
+        data = parse_microcenter_html(beautiful_soup_object)
+        file_name = f"{store}.csv"
+        write_to_csv(data, file_name)
+        return file_name
+    # Add more store handlers here as they are implemented
+    else:
+        print(f"Handler for {store} not implemented yet")
+        return None
 
 async def main():
-    search_param = input("Enter the search parameter: ")
-
-    beautiful_soup_object = fetch_microcenter_html(search_param)
-    data = parse_microcenter_html(beautiful_soup_object)
+    # First, let user select stores
+    selected_stores = select_stores()
+    print(f"\nSelected stores: {', '.join(store.title() for store in selected_stores)}")
     
-    file_name = "microcenter.csv"
-    write_to_csv(data, file_name)
-    print(f"Data written to src/data/{file_name}")
+    # Get search parameter
+    search_param = input("\nEnter the search parameter: ")
+    
+    # Process each selected store
+    processed_files = []
+    for store in selected_stores:
+        print(f"\nProcessing {store.title()}...")
+        file_name = await process_store(store, search_param)
+        if file_name:
+            processed_files.append(file_name)
+            print(f"Data written to src/data/{file_name}")
 
-    # Send file via Telegram if enabled
-    if TELEGRAM_ALERT_ENABLED and TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
+    # Send files via Telegram if enabled
+    if processed_files and TELEGRAM_ALERT_ENABLED and TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
         telegram = TelegramAlert(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
-        success = await telegram.send_file(
-            f"src/data/{file_name}",
-            caption=f"Product data for search: {search_param}"
-        )
         
-        if success:
-            print("File sent successfully via Telegram")
-        else:
-            print("Failed to send file via Telegram")
-    else:
+        for file_name in processed_files:
+            success = await telegram.send_file(
+                f"src/data/{file_name}",
+                caption=f"Product data for search: {search_param} from {file_name.replace('.csv', '').title()}"
+            )
+            
+            if success:
+                print(f"File {file_name} sent successfully via Telegram")
+            else:
+                print(f"Failed to send file {file_name} via Telegram")
+    elif processed_files:
         print("Telegram alerts are disabled or not configured")
 
 if __name__ == "__main__":
