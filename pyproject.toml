@@ -1,7 +1,7 @@
 [project]
 name = "tech-product-tracker"
 version = "0.1.0"
-description = "This is a web scraping project that tracks the price of products from various tech stores."
+description = "Track tech product prices and availability"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -14,3 +14,7 @@ dependencies = [
     "pandas>=2.3.0",
     "schedule>=1.2.2",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
