@@ -61,7 +61,6 @@ EMAIL_RECIPIENT = os.getenv("EMAIL_RECIPIENT")
 
 # Telegram Configuration
 TELEGRAM_ALERT_ENABLED = os.getenv("TELEGRAM_ALERT_ENABLED", "false").lower() == "true"
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
