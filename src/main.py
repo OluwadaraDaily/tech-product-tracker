@@ -9,7 +9,7 @@ from utils import select_stores
 async def process_store(store: str, search_param: str) -> str:
     """Process a single store and return the CSV filename."""
     if store == "microcenter":
-        beautiful_soup_object = fetch_microcenter_html(search_param)
+        beautiful_soup_object = await fetch_microcenter_html(search_param)
         data = parse_microcenter_html(beautiful_soup_object)
         file_name = f"{store}.csv"
         write_to_csv(data, file_name)

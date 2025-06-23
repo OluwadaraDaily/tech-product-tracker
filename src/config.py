@@ -17,8 +17,8 @@ ENVIRONMENT = os.getenv("ENV", "development")
 # Target Site URLs
 # --------------------
 SCRAPE_TARGETS = {
-    "microcenter": "https://www.microcenter.com/search/search_results.aspx?N=4294967288",
-    "bh": "https://www.bhphotovideo.com/c/search?N=4294542558"
+    "microcenter": "https://www.microcenter.com",
+    "bh": "https://www.bhphotovideo.com/c/search"
 }
 
 # --------------------

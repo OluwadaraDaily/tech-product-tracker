@@ -9,6 +9,7 @@ A Python-based web scraping application that monitors and tracks prices of tech 
 - Telegram bot integration for notifications
 - Scheduled price checks
 - Customizable alert system
+- Browser automation for dynamic content scraping
 
 ## Project Structure
 
@@ -31,6 +32,7 @@ tech-product-tracker/
 
 - Python 3.10 or higher
 - Dependencies listed in `pyproject.toml`
+- Playwright browser binaries (installed automatically during setup)
 
 ## Installation
 
@@ -53,6 +55,12 @@ tech-product-tracker/
    pip install .
    ```
 
+4. Install Playwright and browser binaries:
+   ```bash
+   pip install playwright
+   playwright install  # This will download and install browser binaries
+   ```
+
 ## Configuration
 
 1. Create a `.env` file in the project root with your configuration:
@@ -73,6 +81,7 @@ tech-product-tracker/
 - pandas: Data manipulation and analysis
 - schedule: Job scheduling
 - python-dotenv: Environment variable management
+- playwright: Browser automation for dynamic content scraping
 
 ## Contributing
 
