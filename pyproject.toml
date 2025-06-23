@@ -1,0 +1,16 @@
+[project]
+name = "tech-product-tracker"
+version = "0.1.0"
+description = "This is a web scraping project that tracks the price of products from various tech stores."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+    "python-dotenv",
+    "python-telegram-bot",
+    "python-telegram-bot-calendar",
+    "dotenv>=0.9.9",
+    "pandas>=2.3.0",
+    "schedule>=1.2.2",
+]

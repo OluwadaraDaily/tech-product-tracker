@@ -1,0 +1,1 @@
+# Responsible for parsing BeautifulSoup HTML objects into structured data
