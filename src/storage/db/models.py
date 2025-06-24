@@ -39,6 +39,7 @@ class Product:
             link=data['link'],
             image_url=data['image'],
             store=data.get('store', 'unknown'),
+            price_change_percentage=data.get('price_change_percentage', 0),
             created_at=datetime.now(),
             updated_at=datetime.now()
         )

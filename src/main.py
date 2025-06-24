@@ -1,19 +1,14 @@
 import asyncio
-from fetchers.microcenter import fetch_microcenter_html
-from parsers.microcenter import parse_microcenter_html
-from storage.csv_writer import write_to_csv
+from processing.microcenter import process_microcenter
 from alerts.telegram import TelegramAlert
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_ALERT_ENABLED
 from utils import select_stores
 
+
 async def process_store(store: str, search_param: str) -> str:
     """Process a single store and return the CSV filename."""
     if store == "microcenter":
-        beautiful_soup_object = await fetch_microcenter_html(search_param)
-        data = parse_microcenter_html(beautiful_soup_object)
-        file_name = f"{store}.csv"
-        write_to_csv(data, file_name)
-        return file_name
+        return await process_microcenter(search_param)
     # Add more store handlers here as they are implemented
     else:
         print(f"Handler for {store} not implemented yet")

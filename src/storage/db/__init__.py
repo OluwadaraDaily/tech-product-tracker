@@ -1,7 +1,7 @@
 from .connection import DatabaseConnection
 from .models import Product, PriceHistory
 from .queries import ProductQueries
-from .migrations import migrate_database, get_migrations
+from .migrations import migrate_database
 
 class Database:
     def __init__(self, db_path: str = "src/data/products.db"):
@@ -22,7 +22,6 @@ class Database:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # The connection will be closed by the context manager
         pass
 
 __all__ = ['Database', 'Product', 'PriceHistory'] 

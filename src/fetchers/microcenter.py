@@ -23,7 +23,7 @@ async def fetch_microcenter_html(search_param: str) -> BeautifulSoup:
         await page.wait_for_selector('.product_wrapper')
         
         # Add a small delay to ensure all dynamic content is loaded
-        await asyncio.sleep(10)  # Using asyncio.sleep instead of time.sleep
+        await asyncio.sleep(3)
         
         # Get the page content
         html = await page.content()
