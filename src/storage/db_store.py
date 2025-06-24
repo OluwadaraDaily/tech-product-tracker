@@ -34,3 +34,14 @@ def get_latest_prices(product_ids: List[int]) -> Dict[int, float]:
     """Get the most recent prices for multiple products"""
     with Database() as db:
         return db.products.get_latest_prices(product_ids)
+
+def get_products_with_stats(store: str = None) -> List[Dict]:
+    """
+    Get products with their price statistics (lowest, highest, average prices)
+    Args:
+        store: Optional store name to filter by
+    Returns:
+        List of dictionaries containing product and price statistics
+    """
+    with Database() as db:
+        return db.products.get_products_with_stats(store)

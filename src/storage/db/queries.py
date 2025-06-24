@@ -221,4 +221,37 @@ class ProductQueries:
                 return existing_product.id
         else:
             # Insert new product
-            return self.insert_product(product) 
+            return self.insert_product(product)
+
+    def get_price_statistics(self, product_id: int) -> Dict[str, float]:
+        """Get price statistics for a product (lowest, highest, average price)"""
+        with self.connection.get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT 
+                    MIN(price) as lowest_price,
+                    MAX(price) as highest_price,
+                    AVG(price) as avg_price
+                FROM price_history
+                WHERE product_id = ?
+            """, (product_id,))
+            row = cursor.fetchone()
+            return {
+                'lowest_price': row['lowest_price'] if row['lowest_price'] is not None else 0.0,
+                'highest_price': row['highest_price'] if row['highest_price'] is not None else 0.0,
+                'avg_price': round(row['avg_price'], 2) if row['avg_price'] is not None else 0.0
+            }
+
+    def get_products_with_stats(self, store: Optional[str] = None, limit: int = 100) -> List[Dict]:
+        """Get products with their price statistics"""
+        products = self.get_products(store, limit)
+        result = []
+        
+        for product in products:
+            stats = self.get_price_statistics(product.id)
+            product_dict = {
+                'product': product,
+                'stats': stats
+            }
+            result.append(product_dict)
+        
+        return result 
