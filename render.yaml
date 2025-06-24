@@ -1,0 +1,16 @@
+services:
+  - type: cron
+    name: tech-product-tracker
+    runtime: python
+    schedule: "0 0 * * *"  # Run at midnight every day
+    buildCommand: chmod +x build.sh
+    startCommand: ./build.sh
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: TELEGRAM_ALERT_ENABLED
+        value: "true" 

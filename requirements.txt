@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+python-dotenv
+python-telegram-bot
+python-telegram-bot-calendar
+python-dotenv>=0.9.9
+pandas>=2.3.0
+schedule>=1.2.2
+playwright>=1.41.0 
