@@ -7,6 +7,9 @@ from utils import select_stores
 
 
 DEFAULT_STORES = ["microcenter"]
+DOES_STORE_HAVE_SEARCH_PARAMS = {
+    "microcenter": True
+}
 DEFAULT_SEARCH_PARAMS = {
     "microcenter": [
     "gpu",
@@ -33,9 +36,10 @@ async def run_automated_mode():
     
     # Process each store with each search parameter
     for store in DEFAULT_STORES:
-        for search_param in DEFAULT_SEARCH_PARAMS[store]:
-            print(f"\nProcessing {store.title()} for {search_param}...")
-            file_name = await process_store(store, search_param)
+        if DOES_STORE_HAVE_SEARCH_PARAMS[store]:
+            for search_param in DEFAULT_SEARCH_PARAMS[store]:
+                print(f"\nProcessing {store.title()} for {search_param}...")
+                file_name = await process_store(store, search_param)
             if file_name:
                 processed_files.append((file_name, search_param))
                 print(f"Data written to src/data/{file_name}")
