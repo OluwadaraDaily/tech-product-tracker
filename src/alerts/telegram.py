@@ -1,4 +1,3 @@
-import os
 import logging
 from telegram import Bot
 from telegram.error import TelegramError

@@ -6,7 +6,7 @@ from alerts import telegram_handler
 async def main():
     """Main entry point for the tech product tracker."""
     # Check if running in automated mode (e.g., via CRON job)
-    is_automated = os.environ.get('AUTOMATED_MODE', '').lower() == 'true'
+    is_automated = False
     
     if is_automated:
         print("Running in automated mode...")

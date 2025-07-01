@@ -1,6 +1,6 @@
 from typing import List, Tuple
 from .telegram import TelegramAlert
-from ..config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_ALERT_ENABLED
+from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_ALERT_ENABLED
 
 async def send_alerts(processed_files: List[Tuple[str, str]]) -> None:
     """Send processed files via Telegram if enabled."""

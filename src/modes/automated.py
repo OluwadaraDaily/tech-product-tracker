@@ -1,5 +1,5 @@
 from typing import List, Tuple
-from ..processing.microcenter import process_microcenter
+from processing.microcenter import process_microcenter
 
 # Default configurations
 DEFAULT_STORES = ["microcenter"]
@@ -10,10 +10,10 @@ DEFAULT_SEARCH_PARAMS = {
     "microcenter": [
         "gpu",
         "cpu",
-        "ram",
-        "ssd",
-        "macbook",
-        "monitor"
+        # "ram",
+        # "ssd",
+        # "macbook",
+        # "monitor"
     ]
 }
 

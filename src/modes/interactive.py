@@ -1,6 +1,6 @@
 from typing import List, Tuple
-from ..processing.microcenter import process_microcenter
-from ..utils import select_stores
+from processing.microcenter import process_microcenter
+from utils import select_stores
 
 async def process_store(store: str, search_param: str | None) -> str:
     """Process a single store and return the CSV filename."""
